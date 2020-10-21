@@ -1,0 +1,250 @@
+.nav-item{
+    font-style: oblique;
+}
+
+.carbutton{
+  margin-right:30px;
+  color: rgba(0,0,0,.5);
+}
+
+.carbutton:hover {
+    color: rgba(0,0,0,.7);
+}
+/* Estilos para los botones en tamaño pequeño  */
+.topbutton_md{
+  display: none;
+}
+.topbutton_sm{
+  display: block;
+  color: whitesmoke;
+}
+
+
+@media (min-width: 992px) { 
+  .topbutton_sm{
+    display: none;
+  }
+  .topbutton_md{
+    display: block;
+    color: whitesmoke;
+  }
+ }
+
+
+ input[type=number]::-webkit-inner-spin-button, 
+ input[type=number]::-webkit-outer-spin-button { 
+   -webkit-appearance: none; 
+   margin: 0; 
+ }
+  /* estilos de sidebar carrito */
+
+  .cd-cart {
+    right: 0;
+    position: fixed;
+    background: #FFF;
+    -webkit-transition: right 0.3s;
+    -moz-transition: right 0.3s;
+    transition: 1s; 
+  }
+  .cd-cart.speed-in {
+    right: 0;
+  }
+  .cd-cart > * {
+    padding: 0 1em;
+  }
+  .cd-cart h2 {
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 1em 0;
+  }
+  .cd-cart .cd-cart-items {
+    padding: 0;
+  }
+  .cd-cart .cd-cart-items li {
+    position: relative;
+    padding: 1em;
+    border-top: 1px solid #e0e6ef;
+  }
+  .cd-cart .cd-cart-items li:last-child {
+    border-bottom: 1px solid #e0e6ef;
+  }
+  .cd-cart .cd-qty, .cd-cart .cd-price {
+    color: #a5aebc;
+  }
+  .cd-cart .cd-price {
+    margin-top: .4em;
+  }
+  .cd-cart .cd-item-remove {
+    position: absolute;
+    right: 1em;
+    top: 50%;
+    bottom: auto;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-radius: 50%;
+    color: rgba(73, 73, 73, 0.5);
+  }
+  .cd-cart .cd-item-remove:hover {
+    /* background-color: #e0e6ef; */
+    color: rgba(0,0,0,.7);
+  }
+  .cd-cart .cd-cart-total {
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+  .cd-cart .cd-cart-total span {
+    float: right;
+  }
+  .cd-cart .cd-cart-total::after {
+    /* clearfix */
+    content: '';
+    display: table;
+    clear: both;
+  }
+  .cd-cart .checkout-btn {
+    display: block;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background: orange;
+    border-color: orangered;
+    color: #FFF;
+    text-align: center;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+
+  .text-uppercase {
+    text-transform: uppercase!important;
+  }
+  
+  .cd-cart .checkout-btn:hover {
+    background-color: deeppink;
+    border-color: maroon;
+  }
+  .cd-cart .cd-go-to-cart {
+    text-align: center;
+    margin: 1em 0;
+  }
+  .cd-cart .cd-go-to-cart a {
+    text-decoration: underline;
+  }
+  @media only screen and (min-width: 1200px) {
+    .cd-cart > * {
+      padding: 0 2em;
+    }
+    .cd-cart .cd-cart-items li {
+      padding: 1em 2em;
+    }
+    .cd-cart .cd-item-remove {
+      right: 2em;
+    }
+  }
+
+  .cd-cart .cd-go-to-cart {
+    text-align: center;
+    margin: 1em 0;
+  }
+  /* .cd-cart .cd-go-to-cart a {
+    text-decoration: underline;
+  } */
+
+  /* w3 sidebar */
+
+  .w3-sidebar {
+    height: 100%;
+    width: 0px;
+    float: right;
+    background-color: #fff;
+    position: fixed!important;
+    z-index: 1000000;
+    overflow: auto;
+}
+
+.w3-card-4, .w3-hover-shadow:hover {
+  box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+}
+
+.w3-animate-left {
+  position: relative;
+  animation: animateright 0.4s;
+}
+
+/* Position and style the close button (top right corner) */
+.w3-sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right:0;
+  font-size: 36px;
+}
+
+.form-control-cantidad {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-control-calle {
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-control-numero {
+  height: 34px;
+  width: 80px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-control-referencia {
+  height: 60px;
+  width: 266px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.checkout-btn-modal {
+  display: block;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background: orange;
+  border-color: orangered;
+  color: #FFF;
+  text-align: center;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.checkout-btn-modal:hover {
+  background-color: deeppink;
+  border-color: maroon;
+}
+
+::ng-deep .btn-link {
+  color: #1d2124;
+}
+
+::ng-deep .btn-link:hover {
+  color: #676768;
+}

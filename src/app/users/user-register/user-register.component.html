@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div style="margin-top: 135px;">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mt-5">
+        <div *ngIf="message" class="alert alert-success" role="alert">
+          <strong>Success!</strong> {{message}}
+          <button type="button" class="close" (click)="cleanError()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <h4 class="card-header">User register</h4>
+          <div class="card-body">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" formControlName="email" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required">Email is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" [pattern]="mascaraTelefono" formControlName="telefono" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.telefono.errors }" />
+                <div *ngIf="submitted && f.telefono.errors" class="invalid-feedback">
+                  <div *ngIf="f.telefono.errors.required">Teléfono is required</div>
+                  <div *ngIf="f.telefono.errors.pattern">Captura el teléfono a 10 digitos</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" formControlName="password" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password">Confirm password</label>
+                <input type="password" formControlName="passwordTwo" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                  <div *ngIf="f.passwordTwo.errors.required">Confirm password is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                Rol:
+                <select class="form-control" formControlName="rol"
+                  [ngClass]="{ 'is-invalid': submitted && f.rol.errors }">
+                  <option *ngFor="let rol of roles" [value]="rol.id">
+                    {{ rol.texto}}
+                  </option>
+                </select>
+              </div>
+              <div>
+                <button class="btn btn-success mr-2 mt-3" type="submit"> Register </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

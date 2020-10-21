@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-5">
+      <h3 style="width: 80%; margin-left: 10%; text-align: center;  margin-top: 130px;">{{ titulo }}</h3>
+      <form class="mt-5" [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>Dirección de correo electrónico</label>
+          <input type="email" formControlName="email" class="form-control" aria-describedby="emailHelp" placeholder="Ingresa tu email"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <small id="emailHelp" class="form-text text-muted">Nunca compartiremos tu cuenta con nadie más.</small>
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">El email es obligatorio</div>
+            <div *ngIf="f.email.errors.email">Por favor, ingresa tu Email</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary btn-lg btn-block">Aceptar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 offset-md-3 mt-3">
+      <div *ngIf="message" class="alert alert-success" role="alert">
+        <strong>Perfecto!</strong> {{ message }}
+        <button type="button" class="close" (click)="cleanError()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

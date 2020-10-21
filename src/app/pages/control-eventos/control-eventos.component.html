@@ -1,0 +1,200 @@
+<div class="container-fluid" style="margin-top: 130px;">
+  <div class="row">
+    <div class="col-lg-12">
+      <div *ngIf="message" class="alert alert-success" role="alert">
+        <strong>Success!</strong> {{message}}
+        <button type="button" class="close" (click)="cleanError()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4 mt-3">
+      <div class="card">
+        <h4 class="card-header bg-dark text-white">Filtrar por:</h4>
+        <div class="card-body">
+          <form (ngSubmit)="getDataForm()" [formGroup]="filterForm">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">El email es obligatorio</div>
+                <div *ngIf="f.email.errors.email">Por favor, ingresa tu Email</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="date" formControlName="fecha_evento" placeholder="Fecha">
+            </div>
+
+            <div class="form-group">
+              <label for="inputEvent">Evento</label>
+              <select id="inputEvent"  class="form-control" formControlName="nombre" >
+                <option selected [value]="">Todos</option>
+                <option *ngFor="let nombre of nombresEventos" [value]="nombre">
+                    {{ nombre }}
+                </option>
+              </select>
+            </div>
+            
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="pagado" formControlName="pagado">
+              <label class="form-check-label" for="pagado">Pagado</label>
+            </div>
+            <div class="col-12">
+              <button class="btn ink-reaction float-right btn-md btn-light" style="margin: 10px"
+                (click)="resetForm()"><i class="fa fa-eraser " aria-hidden="true "></i></button>
+              <button class="btn ink-reaction float-right btn-md btn-primary" style="margin: 10px"><i
+                  class="fa fa-search" aria-hidden="true "></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mt-3">
+      <div class="table-responsive mt-3" *ngIf='lista.length > 0'>
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col ">
+                <h5>Email</h5>
+              </th>
+              <th scope="col ">
+                <h5>Nombre</h5>
+              </th>
+              <th scope="col ">
+                <h5>Lugares</h5>
+              </th>
+              <th scope="col">
+                <h5>Fecha</h5>
+              </th>
+              <th scope="col">
+                <h5>Folio</h5>
+              </th>
+              <th scope="col">
+                <h5>Pagado</h5>
+              </th>
+              <th scope="col">
+                <h5>Opciones</h5>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="mb-2">
+            <tr *ngFor="let l of lista | paginate: { itemsPerPage: 6, currentPage: p }">
+              <th >{{ l.usuario.email }}</th>
+              <th >{{ l.evento.nombre }}</th>
+              <td >{{ l.lugares_reservados }}</td>
+              <td >{{l.evento.fecha_evento| date:'yyyy-MM-dd'}}</td>
+              <td scope="row">{{ l.id }}</td>
+              <td class="" *ngIf= 'l.pagado'><i class="far fa-check-circle fa-2x"></i></td>
+              <td class="" *ngIf= '!l.pagado'><i class="far fa-circle fa-2x"></i></td>
+              <td>
+                <div class="set-botones">
+                  <button class="btn  btn-sm btn-info ml-2 xs-margin" style="border-radius: 10px; width: 30px;"
+                    (click)="getActivity(l.id, seeModal)">
+                    <i class="fas fa-seedling" aria-hidden="true"></i></button>
+                  <button class="btn  btn-sm btn-success ml-2 xs-margin" style="border-radius: 10px; width: 30px;"
+                    (click)="getActivity(l.id, updateModal)"><i class="fas fa-edit" aria-hidden="true"></i></button>
+                  <button class="btn  btn-sm btn-danger ml-2 xs-margin" style="border-radius: 10px; width: 30px;"
+                    (click)="getActivity(l.id, deleteModal)"><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </table>
+      </div>
+      <div *ngIf='lista.length == 0'>
+        No existen registros.
+      </div>
+    </div>
+  </div>
+
+
+
+  <ng-template #updateModal let-modal>
+    <form [formGroup]="updateForm" (ngSubmit)="updateListaVenta()">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Editar reservación</h5>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+
+          <div class="card-body">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" formControlName="updateReservacionPagado" id="updateReservacionPagado">
+              <label class="form-check-label" for="updateReservacionPagado">
+                Pagado
+              </label>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal(updateModal)">Cancelar</button>
+        <button class="btn btn-success mr-2">Editar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #deleteModal let-modal>
+    <form (ngSubmit)="deleteVenta()">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Eliminar actividad</h5>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            Desea eliminar la reservación de:
+            <strong><label>{{ updateReservacion.usuario.email }}</label></strong> con total:
+            <strong><label>{{ updateReservacion.total }}</label></strong> y folio:
+            <strong><label>{{ updateReservacion.id }}</label></strong>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal(deleteModal)">Cancelar</button>
+        <button class="btn btn-danger mr-2">Eliminar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #seeModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteModalLabel">Reservación</h5>
+    </div>
+    <div class="modal-body">
+      <div class="card">
+        <div class="card-body mb-3">
+          Folio: <strong><label>{{ updateReservacion.id }}</label></strong><br />
+          Email: <strong><label>{{ updateReservacion.usuario.email }}</label></strong><br />
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateReservacion.pagado" disabled>
+            <label class="form-check-label" for="final">Pagado</label>
+          </div>
+          <div class="form-group">
+            <h3 >Precio:  <strong><label>{{ updateReservacion.evento.precio }}</label></strong><br/></h3>
+          </div>
+          <div class="form-group">
+            <h3 >Lugares reservados:  <strong><label>{{ updateReservacion.lugares_reservados }}</label></strong><br/></h3>
+          </div>
+          <hr>
+          <div  style="right: 10px; position: absolute;">
+            <h3 >Total: $ <strong><label>{{ updateReservacion.evento.precio*updateReservacion.lugares_reservados }}</label></strong><br/></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal(seeModal)">Aceptar</button>
+    </div>
+  </ng-template>
+
+
+</div>

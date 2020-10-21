@@ -1,0 +1,225 @@
+<div class="container-fluid" style="margin-top: 130px;">
+  <div class="row">
+    <div class="col-lg-12">
+      <div *ngIf="message" class="alert alert-success" role="alert">
+        <strong>Success!</strong> {{message}}
+        <button type="button" class="close" (click)="cleanError()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4 mt-3">
+      <div class="card">
+        <h4 class="card-header bg-dark text-white">Filtrar por:</h4>
+        <div class="card-body">
+          <form (ngSubmit)="getDataForm()" [formGroup]="filterForm">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="text" formControlName="email" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">El email es obligatorio</div>
+                <div *ngIf="f.email.errors.email">Por favor, ingresa tu Email</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input class="form-control" type="date" formControlName="fecha_registro" placeholder="Fecha">
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="finalizada" formControlName="venta_finalizada">
+              <label class="form-check-label" for="finalizada">Finalizada</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="pagada" formControlName="pagado">
+              <label class="form-check-label" for="pagada">Pagada</label>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="entregada" formControlName="entregado">
+              <label class="form-check-label" for="entregada">Entregada</label>
+            </div>
+            <div class="col-12">
+              <button class="btn ink-reaction float-right btn-md btn-light" style="margin: 10px"
+                (click)="resetForm()"><i class="fa fa-eraser " aria-hidden="true "></i></button>
+              <button class="btn ink-reaction float-right btn-md btn-primary" style="margin: 10px"><i
+                  class="fa fa-search" aria-hidden="true "></i></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mt-3">
+      <div class="table-responsive mt-3" *ngIf='listaVentas.length > 0'>
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col ">
+                <h5>Email</h5>
+              </th>
+              <th scope="col ">
+                <h5>Total</h5>
+              </th>
+              <th scope="col">
+                <h5>Fecha compra</h5>
+              </th>
+              <th scope="col">
+                <h5>Folio</h5>
+              </th>
+              <th scope="col">
+                <h5>Finalizada</h5>
+              </th>
+              <th scope="col">
+                <h5>Pagada</h5>
+              </th>
+              <th scope="col">
+                <h5>Entregada</h5>
+              </th>
+              <th scope="col">
+                <h5>Opciones</h5>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="mb-2">
+            <tr *ngFor="let l of listaVentas | paginate: { itemsPerPage: 6, currentPage: p }">
+              <th >{{ l.usuario.email }}</th>
+              <td >{{ l.total }}</td>
+              <td >{{l.fecha_registro| date:'yyyy-MM-dd'}}</td>
+              <td scope="row">{{ l.id }}</td>
+              <td class="" *ngIf= 'l.venta_finalizada'><i class="far fa-check-circle fa-2x"></i></td>
+              <td class="" *ngIf= '!l.venta_finalizada'><i class="far fa-circle fa-2x"></i></td>
+
+              <td class="" *ngIf= 'l.pagado'><i class="far fa-check-circle fa-2x"></i></td>
+              <td class="" *ngIf= '!l.pagado'><i class="far fa-circle fa-2x"></i></td>
+
+              <td class="" *ngIf= 'l.entregado'><i class="far fa-check-circle fa-2x"></i></td>
+              <td class="" *ngIf= '!l.entregado'><i class="far fa-circle fa-2x"></i></td>
+
+              <td>
+                <div class="set-botones">
+                  <button class="btn  btn-sm btn-info ml-2 xs-margin" style="border-radius: 10px; width: 30px;"
+                    (click)="getActivity(l.id, seeModal)">
+                    <i class="fas fa-seedling" aria-hidden="true"></i></button>
+                  <button class="btn  btn-sm btn-success ml-2 xs-margin" style="border-radius: 10px; width: 30px;"
+                    (click)="getActivity(l.id, updateModal)"><i class="fas fa-edit" aria-hidden="true"></i></button>
+                  <button class="btn  btn-sm btn-danger ml-2 xs-margin" style="border-radius: 10px; width: 30px;"
+                    (click)="getActivity(l.id, deleteModal)"><i class="far fa-trash-alt" aria-hidden="true"></i></button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </table>
+      </div>
+      <div *ngIf='listaVentas.length == 0'>
+        No existen registros.
+      </div>
+    </div>
+  </div>
+
+
+
+  <ng-template #updateModal let-modal>
+    <form [formGroup]="updateForm" (ngSubmit)="updateListaVenta()">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateModalLabel">Editar venta</h5>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+
+          <div class="card-body">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" formControlName="pagado" id="pagado"
+                [(ngModel)]="updateVenta.pagado">
+              <label class="form-check-label" for="pagado">
+                Pagado
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" formControlName="entregado" id="entregado"
+                [(ngModel)]="updateVenta.entregado">
+              <label class="form-check-label" for="entregado">
+                Entregado
+              </label>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal(updateModal)">Cancelar</button>
+        <button class="btn btn-success mr-2">Editar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #deleteModal let-modal>
+    <form (ngSubmit)="deleteVenta()">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Eliminar actividad</h5>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            Desea eliminar la venta de:
+            <strong><label>{{ updateVenta.usuario.email }}</label></strong> con total:
+            <strong><label>{{ updateVenta.total }}</label></strong> y folio:
+            <strong><label>{{ updateVenta.id }}</label></strong>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal(deleteModal)">Cancelar</button>
+        <button class="btn btn-danger mr-2">Eliminar</button>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-template #seeModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteModalLabel">Ticket</h5>
+    </div>
+    <div class="modal-body">
+      <div class="card">
+        <div class="card-body mb-3">
+          Folio: <strong><label>{{ updateVenta.id }}</label></strong><br />
+          Email: <strong><label>{{ updateVenta.usuario.email }}</label></strong><br />
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateVenta.venta_finalizada"
+              disabled>
+            <label class="form-check-label" for="final">Finalizada</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateVenta.pagado" disabled>
+            <label class="form-check-label" for="final">Pagada</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateVenta.entregado" disabled>
+            <label class="form-check-label" for="final">Entregada</label>
+          </div>
+          <hr>
+          <div *ngFor="let p of productosVenta">
+            {{ p.producto.nombre}}: <strong><label>{{ p.producto.precio }}</label></strong>. Cantidad:
+            <strong>{{ p.cantidad}}</strong><br />
+            <hr>
+          </div>
+          <div  style="right: 10px; position: absolute;">
+            <h3 >Total: $ <strong><label>{{ updateVenta.total }}</label></strong><br/></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal(seeModal)">Aceptar</button>
+    </div>
+  </ng-template>
+
+
+</div>

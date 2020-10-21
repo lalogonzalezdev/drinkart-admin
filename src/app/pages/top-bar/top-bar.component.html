@@ -1,0 +1,67 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light topbar fixed-top"> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark topbar fixed-top" style="background-color: black;"
+  (window:resize)="onResize($event)">
+  <a class="navbar-brand" routerLink="/">
+    <img class="responsive" src="assets/images/logo.png" width="120" height="100" alt="">
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <div ngbDropdown class="d-inline-block">
+      <button class="btn btn-outline-light" id="dropdownAdmin" ngbDropdownToggle  *ngIf="currentUser && currentUser.rol ===1">
+        <i class="fas fa-cogs"></i>
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownAdmin">
+        <button ngbDropdownItem [routerLink]="['/control-ventas']"> <i class="fab fa-sellsy"></i>Ventas </button>
+        <button ngbDropdownItem [routerLink]="['/control-eventos']"><i class="fas fa-calendar-week"></i>
+          Sesiones</button>
+        <button ngbDropdownItem [routerLink]="['/control-propuestas-artisticas']"><i class="fas fa-paint-brush"></i>
+          Propuestas artisticas </button>
+        <div class="dropdown-divider"></div>
+        <button ngbDropdownItem [routerLink]="['/user-register']"><i class="fas fa-user-plus"></i> Agregar usuario
+        </button>
+        <button ngbDropdownItem [routerLink]="['/user-list']"> <i class="fas fa-users"></i> Lista de usuarios </button>
+        <button ngbDropdownItem [routerLink]="['/cotizaciones']"> <i class="fas fa-angle-double-right"></i> Cotizaciones </button>
+      </div>
+    </div>
+
+
+    <div class="mr-auto">
+
+    </div>
+
+
+
+
+
+    <h5 class="nav-link mt-2" [routerLink]="['/login']" *ngIf="!currentUser">
+      <label>Ingresar</label>
+    </h5>
+
+    <ng-template #popContentUsuario>
+        <a class="mt-2" style="color: black;" (click)="logout()">
+          <i style="width: 30px; text-align: center; font-size: x-large;" class="fa fa-sign-out-alt"> </i> 
+          <label style="margin-left: 3px;">
+            Salir</label>
+           </a>
+    </ng-template>
+    <ng-template #popTitleUsuario><b class="mr-1"> {{currentUser.email}} </b></ng-template>
+    <h5 class="nav-link topbutton_md mt-2 " *ngIf="currentUser" [ngbPopover]="popContentUsuario"  placement="left"
+      [popoverTitle]="popTitleUsuario">
+      <label><i class="fas fa-user-cog"></i></label>
+    </h5>
+
+
+
+
+  </div>
+</nav>
+

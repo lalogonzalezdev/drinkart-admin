@@ -1,0 +1,11 @@
+@media (max-width: 767px) {
+    .xs-margin {
+        margin-bottom: 10px; 
+      }
+    }
+.set-botones{
+  display: block;
+  width: 135px;
+  height: 45px;
+  padding: 5px;
+}

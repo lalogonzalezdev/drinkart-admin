@@ -1,0 +1,9 @@
+table {
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+.xs-margin {
+    margin-bottom: 10px;
+  }
+}

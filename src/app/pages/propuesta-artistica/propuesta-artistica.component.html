@@ -1,0 +1,89 @@
+<div class="container" style="margin-top: 130px;">
+  <!-- Comments Form -->
+  <div class="row">
+
+    <div class="col-md-6 offset-md-3 mt-5">
+      <h3 style="width: 60%; margin-left: 20%; text-align: center;">¡Artista compartenos tu experiencia!</h3>
+      <form [formGroup]="comentForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="imagen">Obra de arte</label>
+            <input type="file" class="form-control-file" name="imagen" (change)="onChange($event)" accept=".png,.jpg" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="facebook">Facebook</label>
+              <input class="form-control" formControlName="facebook" placeholder="www.facebook.com/username"
+                [ngClass]="{ 'is-invalid': submitted && f.facebook.errors }" maxlength="99" />
+              <div *ngIf="submitted && f.facebook.errors" class="invalid-feedback">
+                <div *ngIf="f.facebook.errors.required">Captura tu facebook</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="form-group">
+              <label for="instagram">Instagram</label>
+              <input class="form-control" formControlName="instagram" placeholder="www.instragram.com/username"
+                [ngClass]="{ 'is-invalid': submitted && f.instagram.errors }" maxlength="99" />
+              <div *ngIf="submitted && f.instagram.errors" class="invalid-feedback">
+                <div *ngIf="f.instagram.errors.required">Captura tu instagram</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label for="profesion">Profesion</label>
+            <input class="form-control" rows="3" formControlName="profesion" placeholder="Cuentanos a que te dedicas"
+              [ngClass]="{ 'is-invalid': submitted && f.profesion.errors }" maxlength="45" />
+            <div *ngIf="submitted && f.profesion.errors" class="invalid-feedback">
+              <div *ngIf="f.profesion.errors.required">Captura tu profesión</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="historia">Historia</label>
+          <textarea class="form-control" rows="3" formControlName="historia"
+            placeholder="Compartenos una pequeña historia de tu experiencia..."
+            [ngClass]="{ 'is-invalid': submitted && f.historia.errors }" maxlength="250" rows="3"></textarea>
+          <div *ngIf="submitted && f.historia.errors" class="invalid-feedback">
+            <div *ngIf="f.historia.errors.required">Captura tu experiencia</div>
+          </div>
+
+        </div>
+        <hr>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" style="width: 70%; margin-left: 15%;"
+          [disabled]="disabled">Enviar</button>
+      </form>
+
+    </div>
+
+  </div>
+    <div class="row" *ngIf="message" >
+      <div class="col-md-6 offset-md-3 mt-3">
+        <hr>
+        <div class="alert alert-success" role="alert">
+          <div class="row">
+            <div class="col-sm-10">
+              <strong>Todo bien!</strong> {{message + '  Redirigiendo al inicio en '+ (cuentaLimite-cuentaRegresiva)}}
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="close" (click)="cleanError()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div style="height: 50px;">
+
+  </div>
+</div>
