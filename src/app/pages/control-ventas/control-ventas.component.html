@@ -88,7 +88,7 @@
             <tr *ngFor="let l of listaVentas | paginate: { itemsPerPage: 6, currentPage: p }">
               <th >{{ l.usuario.email }}</th>
               <td >{{ l.total }}</td>
-              <td >{{l.fecha_registro| date:'yyyy-MM-dd'}}</td>
+              <td >{{l.fecha_registro| date:'yyyy-MM-dd HH:mm':'+0000'}}</td>
               <td scope="row">{{ l.id }}</td>
               <td class="" *ngIf= 'l.venta_finalizada'><i class="far fa-check-circle fa-2x"></i></td>
               <td class="" *ngIf= '!l.venta_finalizada'><i class="far fa-circle fa-2x"></i></td>
