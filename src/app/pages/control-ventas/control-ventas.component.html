@@ -191,19 +191,19 @@
         <div class="card-body mb-3">
           Folio: <strong><label>{{ updateVenta.id }}</label></strong><br />
           Email: <strong><label>{{ updateVenta.usuario.email }}</label></strong><br />
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateVenta.venta_finalizada"
-              disabled>
-            <label class="form-check-label" for="final">Finalizada</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateVenta.pagado" disabled>
-            <label class="form-check-label" for="final">Pagada</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateVenta.entregado" disabled>
-            <label class="form-check-label" for="final">Entregada</label>
-          </div>
+          Teléfono: <strong><label>{{ updateVenta.usuario.telefono }}</label></strong><br />
+          <br>
+            CP, Estado, Ciudad: 
+          <br>
+            <strong><label>{{ updateVenta.codigo_postal }}, {{ updateVenta.estado }}, {{ updateVenta.ciudad }}</label></strong>
+          <br/>
+            Colonia, Calle, Número: 
+          <br>
+            <strong><label>{{ updateVenta.asentamiento }}, {{ updateVenta.calle }}, {{ updateVenta.numero }}</label></strong>
+          <br>
+            Referencias: <br>
+            <strong><label>{{ updateVenta.referencia }} </label></strong> 
+          <br/>
           <hr>
           <div *ngFor="let p of productosVenta">
             {{ p.producto.nombre}}: <strong><label>{{ p.producto.precio }}</label></strong>. Cantidad:

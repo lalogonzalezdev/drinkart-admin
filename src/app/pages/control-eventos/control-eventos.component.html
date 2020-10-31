@@ -174,15 +174,12 @@
         <div class="card-body mb-3">
           Folio: <strong><label>{{ updateReservacion.id }}</label></strong><br />
           Email: <strong><label>{{ updateReservacion.usuario.email }}</label></strong><br />
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="final" [(ngModel)]="updateReservacion.pagado" disabled>
-            <label class="form-check-label" for="final">Pagado</label>
+          Telefono: <strong><label>{{ updateReservacion.usuario.telefono }}</label></strong><br />
+          <div class="form-group">
+            Precio:  <strong><label>{{ updateReservacion.evento.precio }}</label></strong><br/>
           </div>
           <div class="form-group">
-            <h3 >Precio:  <strong><label>{{ updateReservacion.evento.precio }}</label></strong><br/></h3>
-          </div>
-          <div class="form-group">
-            <h3 >Lugares reservados:  <strong><label>{{ updateReservacion.lugares_reservados }}</label></strong><br/></h3>
+            Lugares reservados:  <strong><label>{{ updateReservacion.lugares_reservados }}</label></strong><br/>
           </div>
           <hr>
           <div  style="right: 10px; position: absolute;">
