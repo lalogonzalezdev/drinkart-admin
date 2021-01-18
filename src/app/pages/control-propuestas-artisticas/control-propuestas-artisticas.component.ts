@@ -44,7 +44,6 @@ export class ControlPropuestasArtisticasComponent implements OnInit {
     this.submitted = true;
     this.apiPages.getListaPropuestas().subscribe(
       data => { this.lista = data; 
-                console.log(data);
                 this.llenarListaImagenesActivas(this.lista)},
       error => {console.log(error); }
     );
@@ -59,9 +58,8 @@ export class ControlPropuestasArtisticasComponent implements OnInit {
     this.apiPages.getPropuestaPorPk(id).subscribe(
       data => { 
         this.updatePropuesta = data; 
-        console.log(this.updatePropuesta);
         this.modalService.open(modal, { scrollable: true });
-        console.log(data);},
+        },
       error => {console.log(error); }
     );
   }
@@ -76,7 +74,6 @@ export class ControlPropuestasArtisticasComponent implements OnInit {
   }
 
   deletePropuesta = () => {
-    console.log(this.updatePropuesta);
     this.apiPages.deletePropuestaPorLista(this.updatePropuesta.id).subscribe(
       data => {
         this.getDataForm();

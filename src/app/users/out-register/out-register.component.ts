@@ -73,7 +73,7 @@ export class OutRegisterComponent implements OnInit {
     this.user.password = this.f.password.value;
     this.user.rol = 99;
 
-    console.log(this.user);
+
     if ((
       this.user.password === this.f.passwordTwo.value) &&
       this.user.password !== undefined &&

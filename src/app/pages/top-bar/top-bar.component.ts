@@ -85,7 +85,6 @@ export class TopBarComponent implements OnInit {
   getProductosCarrito = () => {
     this.apiCarrito.getProductosCarrito(this.currentUser.id).subscribe(
       data => {
-        console.log(data);
         this.productosCarrito = data;
         this.total = 0;
         this.productosCarrito.forEach(prod => {
@@ -107,7 +106,6 @@ export class TopBarComponent implements OnInit {
     this.closeNav();
     this.apiCarrito.endVenta(this.currentUser.id, this.total, this.f.asentamiento.value, this.calle, this.numero, this.referencia).subscribe(
       (data) => {
-        console.log(data);
         this.getProductosCarrito();
         this.muestraCombo = false;
         this.muestraInputs = false;
@@ -131,7 +129,6 @@ export class TopBarComponent implements OnInit {
     this.closeNav();
     this.apiCarrito.pagarVenta(this.currentUser.id, this.total, this.f.asentamiento.value, this.calle, this.numero, this.referencia).subscribe(
       (data) => {
-        console.log(data);
         window.open(this.DJANGO_SERVER+'/carrito/pagar_venta/' + data.idVenta, "_self");
       },
       (error) => {
@@ -144,7 +141,6 @@ export class TopBarComponent implements OnInit {
   removeItemCart(prC) {
     this.apiCarrito.removeItemCart(this.currentUser.id, prC.producto.id).subscribe(
       (data) => {
-        console.log(data);
         this.getProductosCarrito();
       },
       (error) => {
@@ -156,7 +152,6 @@ export class TopBarComponent implements OnInit {
   aumentarItemCart(prC) {
     this.apiCarrito.addItemCart(this.currentUser.id, prC.producto.id, prC.cantidad).subscribe(
       (data) => {
-        console.log(data);
         this.getProductosCarrito();
       },
       (error) => {
@@ -168,7 +163,6 @@ export class TopBarComponent implements OnInit {
   decrementarItemCart(prC) {
     this.apiCarrito.quitItemCart(this.currentUser.id, prC.producto.id, prC.cantidad).subscribe(
       (data) => {
-        console.log(data);
         this.getProductosCarrito();
       },
       (error) => {
@@ -208,7 +202,6 @@ export class TopBarComponent implements OnInit {
     try {
       this.apiCarrito.getDireccionList(this.codigoPostal).subscribe(
         data => {
-          console.log(data);
           data.forEach(estado => {
             this.estados.unshift({
                 asentamiento: estado.response.asentamiento,
@@ -221,7 +214,6 @@ export class TopBarComponent implements OnInit {
               this.muestraCombo = true;
               this.codigoNovalido = false;
           });
-          console.log(this.estados);
         },
         error => { 
           console.log(error);
@@ -243,7 +235,6 @@ export class TopBarComponent implements OnInit {
   categorias() {
     this.apiCarrito.getCategorias().subscribe(
       (data) => {
-        console.log(data);
         this.allCategorias = data;
       },
       (error) => {

@@ -57,7 +57,7 @@ export class UserEditComponent implements OnInit {
   getUserFromPk = (id) => {
     this.apiAcceso.getUserByPk(id).subscribe(
       data => { this.user = data;
-      console.log(this.user); },
+       },
       error => {console.log(error); }
     );
   }
@@ -74,7 +74,6 @@ export class UserEditComponent implements OnInit {
     this.user.password = this.f.password.value;
     this.user.rol = this.f.rol.value;
 
-    console.log(this.user);
     if ((this.user.password === this.f.passwordTwo.value) &&
         this.user.password !== undefined &&
         this.f.passwordTwo.value !== undefined)

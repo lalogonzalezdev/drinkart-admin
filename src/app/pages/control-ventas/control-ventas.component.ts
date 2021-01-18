@@ -76,7 +76,7 @@ export class ControlVentasComponent implements OnInit {
       this.f.entregado.value, 
       ).subscribe(
       data => { this.listaVentas = data; 
-        console.log(data);},
+        },
       error => {console.log(error); }
     );
   }
@@ -118,10 +118,8 @@ export class ControlVentasComponent implements OnInit {
     if (this.updateForm.invalid) {
       return;
     }
-    console.log(this.updateVenta);
     this.apiCarrito.updateListaVentas(this.updateVenta).subscribe(
       data => {
-        console.log(data);
         this.getDataForm();
       },
       error => {console.log(error); }
@@ -138,7 +136,7 @@ export class ControlVentasComponent implements OnInit {
       this.updateVenta.id
       ).subscribe(
       data => { this.productosVenta = data; 
-        console.log(data);},
+        },
       error => {console.log(error); }
     );
   }
@@ -147,17 +145,15 @@ export class ControlVentasComponent implements OnInit {
     this.apiCarrito.getListaVentasPk(id).subscribe(
       data => { 
         this.updateVenta = data; 
-        console.log(this.updateVenta);
         this.getProductosDeVenta();
         this.modalService.open(modal, { scrollable: true });
-        console.log(data);},
+        },
       error => {console.log(error); }
     );
   }
 
 
   deleteVenta = () => {
-    console.log(this.updateVenta);
     this.apiCarrito.deleteListaVentas(this.updateVenta.id).subscribe(
       data => {
         this.getDataForm();

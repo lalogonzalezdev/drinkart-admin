@@ -68,7 +68,6 @@ export class ControlEventosComponent implements OnInit {
           if (!this.nombresEventos.includes(reservacion.evento.nombre))
             this.nombresEventos.push(reservacion.evento.nombre);
         }
-        console.log(this.nombresEventos);
       },
       error => {console.log(error); }
     );
@@ -85,10 +84,8 @@ export class ControlEventosComponent implements OnInit {
     if (this.updateForm.invalid) {
       return;
     }
-    console.log(this.updateReservacion);
     this.apiCarrito.updateReservacionPorLista(this.updateReservacion).subscribe(
       data => {
-        console.log(data);
         this.getDataForm();
       },
       error => {console.log(error); }
@@ -106,16 +103,14 @@ export class ControlEventosComponent implements OnInit {
       data => { 
         this.updateReservacion = data; 
         this.updateForm.patchValue({updateReservacionPagado: this.updateReservacion.pagado});
-        console.log(this.updateReservacion);
         this.modalService.open(modal, { scrollable: true });
-        console.log(data);},
+        },
       error => {console.log(error); }
     );
   }
 
 
   deleteVenta = () => {
-    console.log(this.updateReservacion);
     this.apiCarrito.deleteReservacionPorLista(this.updateReservacion.id).subscribe(
       data => {
         this.getDataForm();
