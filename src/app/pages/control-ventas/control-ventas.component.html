@@ -134,7 +134,7 @@
           <div class="card-body">
             <div class="form-check">
               <input class="form-check-input" type="checkbox" formControlName="pagado" id="pagado"
-                [(ngModel)]="updateVenta.pagado" disabled> 
+                [(ngModel)]="updateVenta.pagado"> 
               <label class="form-check-label" for="pagado">
                 Pagado
               </label>
@@ -203,6 +203,13 @@
           <br>
             Referencias: <br>
             <strong><label>{{ updateVenta.referencia }} </label></strong> 
+          <br/>
+          <br>
+            Nombre de quien recibe: <br>
+            <div>
+              <strong><label style="word-wrap:break-word; max-width: 300px;">{{ updateVenta.nombre_receptor }} </label></strong> 
+            </div>
+            
           <br/>
           <hr>
           <div *ngFor="let p of productosVenta">
