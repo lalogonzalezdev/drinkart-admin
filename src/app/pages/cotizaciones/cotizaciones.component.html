@@ -28,7 +28,7 @@
                             <th scope="col">Opciones</th>
                         </tr>
                     </thead>
-                    <tr *ngFor="let l of list | paginate: { itemsPerPage: 5, currentPage: p }">
+                    <tr *ngFor="let l of list | paginate: { itemsPerPage: 30, currentPage: p }">
                         <td>{{ l.email }}</td>
                         <td>{{ l.cantidad }}</td>
                         <td>{{ l.direccion }}</td>

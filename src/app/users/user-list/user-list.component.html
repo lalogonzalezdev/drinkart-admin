@@ -35,7 +35,7 @@
               <th scope="col">Options</th>
             </tr>
           </thead>
-          <tr *ngFor="let l of list | paginate: { itemsPerPage: 5, currentPage: p }">
+          <tr *ngFor="let l of list | paginate: { itemsPerPage: 20, currentPage: p }">
             <td>{{ l.email }}</td>
             <td>{{ enumRoles[l.rol] }}</td>
             <td>

@@ -85,7 +85,7 @@
             </tr>
           </thead>
           <tbody class="mb-2">
-            <tr *ngFor="let l of lista | paginate: { itemsPerPage: 6, currentPage: p }">
+            <tr *ngFor="let l of lista | paginate: { itemsPerPage: 20, currentPage: p }">
               <th >{{ l.usuario.email }}</th>
               <th >{{ l.evento.nombre }}</th>
               <td >{{ l.lugares_reservados }}</td>

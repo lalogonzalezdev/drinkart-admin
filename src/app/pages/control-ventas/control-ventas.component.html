@@ -85,7 +85,7 @@
             </tr>
           </thead>
           <tbody class="mb-2">
-            <tr *ngFor="let l of listaVentas | paginate: { itemsPerPage: 6, currentPage: p }">
+            <tr *ngFor="let l of listaVentas | paginate: { itemsPerPage: 20, currentPage: p }">
               <th >{{ l.usuario.email }}</th>
               <td >{{ l.total }}</td>
               <td >{{l.fecha_registro| date:'yyyy-MM-dd HH:mm':'+0000'}}</td>

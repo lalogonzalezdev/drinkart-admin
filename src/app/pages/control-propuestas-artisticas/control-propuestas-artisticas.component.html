@@ -29,7 +29,7 @@
           </thead>
           <tbody class="mb-2">
             <tr *ngFor="
-                let l of lista | paginate: { itemsPerPage: 3, currentPage: p }
+                let l of lista | paginate: { itemsPerPage: 10, currentPage: p }
               ">
               <th>
                 <img class="img-fluid" [src]="DJANGO_SERVER + l.imagen" alt="" style="width: 100px; height: 100px;" />
