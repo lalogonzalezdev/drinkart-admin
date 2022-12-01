@@ -35,6 +35,7 @@ export class ControlEventosComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
+  
   ngOnInit(): void {
     this.resetForm();
     this.updateForm = this.formBuilderUpdate.group({
