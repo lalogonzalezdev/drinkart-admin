@@ -89,7 +89,7 @@
               <th >{{ l.usuario.email }}</th>
               <th >{{ l.evento.nombre }}</th>
               <td >{{ l.lugares_reservados }}</td>
-              <td >{{l.evento.fecha_evento| date:'yyyy-MM-dd HH:mm':'+0000'}}</td>
+              <td >{{l.evento.fecha_evento| date:'yyyy-MM-dd HH:mm'}}</td>
               <td scope="row">{{ l.id }}</td>
               <td class="" *ngIf= 'l.pagado'><i class="far fa-check-circle fa-2x"></i></td>
               <td class="" *ngIf= '!l.pagado'><i class="far fa-circle fa-2x"></i></td>
